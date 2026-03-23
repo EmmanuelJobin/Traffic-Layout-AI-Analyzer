@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+<div class="map-page-container">
+    <!-- Top Bar with Title and Counters -->
+    <div class="map-top-bar">
+        <div class="map-title">
+            <h2>Singapore Traffic Hotspots</h2>
+            <p>Real-time violation monitoring and safety recommendations</p>
+        </div>
+        <div class="map-counters">
+            <div class="map-counter-badge badge-red">
+                <span class="badge-dot"></span>
+                Critical: 3
+            </div>
+            <div class="map-counter-badge badge-yellow">
+                <span class="badge-dot"></span>
+                Warning: 3
+            </div>
+            <div class="map-counter-badge badge-blue">
+                <span class="badge-dot"></span>
+                Info: 2
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content: Sidebar + Map -->
+    <div class="map-content-layout">
+        <!-- Hotspots Sidebar -->
+        <aside class="hotspots-sidebar">
+            <div class="sidebar-header">
+                <h3>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    Hotspots
+                </h3>
+                <p>4 locations identified</p>
+            </div>
+            <div class="hotspot-list">
+                <!-- Orchard Road -->
+                <div class="hotspot-card" onclick="zoomTo(1.3048, 103.8318)">
+                    <div class="hotspot-card-header">
+                        <div class="hotspot-card-title">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--warning-color)"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                            Orchard Road - Blind Curve
+                        </div>
+                        <span class="mini-badge badge-red">critical</span>
+                    </div>
+                    <div class="violation-details">
+                        <h4>Violations:</h4>
+                        <ul class="violation-list">
+                            <li class="violation-item">90° Blind Curve</li>
+                            <li class="violation-item">No Warning Signage</li>
+                            <li class="violation-item">Inadequate Lighting</li>
+                        </ul>
+                    </div>
+                    <div class="action-details">
+                        <h4>Actions:</h4>
+                        <p class="action-text">3 recommendations</p>
+                    </div>
+                </div>
+
+                <!-- Tampines Ave 5 -->
+                <div class="hotspot-card" onclick="zoomTo(1.3496, 103.9568)">
+                    <div class="hotspot-card-header">
+                        <div class="hotspot-card-title">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--warning-color)"><path d="M13 14h-2V9h2v5zm0 4h-2v-2h2v2zM1 21h22L12 2 1 21z"/></svg>
+                            Tampines Ave 5 - Speed Zone
+                        </div>
+                        <span class="mini-badge badge-yellow">warning</span>
+                    </div>
+                    <div class="violation-details">
+                        <h4>Violations:</h4>
+                        <ul class="violation-list">
+                            <li class="violation-item">High Speed Residential</li>
+                            <li class="violation-item">Missing Speed Bumps</li>
+                        </ul>
+                    </div>
+                    <div class="action-details">
+                        <h4>Actions:</h4>
+                        <p class="action-text">2 recommendations</p>
+                    </div>
+                </div>
+
+                <!-- Marina Bay -->
+                <div class="hotspot-card" onclick="zoomTo(1.2847, 103.8610)">
+                    <div class="hotspot-card-header">
+                        <div class="hotspot-card-title">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--blue-color)"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                            Marina Bay - Pedestrian Safety
+                        </div>
+                        <span class="mini-badge badge-blue">info</span>
+                    </div>
+                    <div class="violation-details">
+                        <h4>Violations:</h4>
+                        <ul class="violation-list">
+                            <li class="violation-item">Narrow Pedestrian Crossing</li>
+                        </ul>
+                    </div>
+                    <div class="action-details">
+                        <h4>Actions:</h4>
+                        <p class="action-text">2 recommendations</p>
+                    </div>
+                </div>
+
+                <!-- Sentosa Gateway -->
+                <div class="hotspot-card" onclick="zoomTo(1.2501, 103.8309)">
+                    <div class="hotspot-card-header">
+                        <div class="hotspot-card-title">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--warning-color)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                            Sentosa Gateway - Traffic Flow
+                        </div>
+                        <span class="mini-badge badge-yellow">warning</span>
+                    </div>
+                    <div class="violation-details">
+                        <h4>Violations:</h4>
+                        <ul class="violation-list">
+                            <li class="violation-item">Congestion Point</li>
+                            <li class="violation-item">Unclear Lane Markings</li>
+                        </ul>
+                    </div>
+                    <div class="action-details">
+                        <h4>Actions:</h4>
+                        <p class="action-text">2 recommendations</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Live Map View Container -->
+        <main class="map-view-container">
+            <div class="map-view-header">
+                <h3>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--primary-color)"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z"/></svg>
+                    Live Map View
+                </h3>
+                <p>Interactive Singapore traffic analysis map</p>
+            </div>
+            <div id="map"></div>
+        </main>
+    </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+    // Initialize the map
+    const map = L.map('map', {
+        zoomControl: false // Hide default zoom buttons to match UI
+    }).setView([1.3521, 103.8198], 12);
+
+    // Add Dark Mode Tiles (using CartoDB Dark Matter)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+    }).addTo(map);
+
+    // Re-add zoom control to the top left
+    L.control.zoom({
+        position: 'topleft'
+    }).addTo(map);
+
+    // Custom Icon Function
+    function createCustomIcon(className, iconText) {
+        return L.divIcon({
+            className: 'custom-div-icon ' + className,
+            html: `<div class='marker-pin'></div><div class='marker-inner'>${iconText}</div>`,
+            iconSize: [30, 42],
+            iconAnchor: [15, 42]
+        });
+    }
+
+    // Hotspot Data
+    const hotspots = [
+        { lat: 1.3048, lng: 103.8318, title: "Orchard Road", type: "critical", icon: "⚠️" },
+        { lat: 1.3496, lng: 103.9568, title: "Tampines Ave 5", type: "warning", icon: "⚡" },
+        { lat: 1.2847, lng: 103.8610, title: "Marina Bay", type: "info", icon: "ℹ️" },
+        { lat: 1.2501, lng: 103.8309, title: "Sentosa Gateway", type: "warning", icon: "🚗" }
+    ];
+
+    // Add Markers
+    hotspots.forEach(spot => {
+        const marker = L.marker([spot.lat, spot.lng], {
+            icon: createCustomIcon(spot.type + '-marker', spot.icon)
+        }).addTo(map);
+        
+        marker.bindPopup(`<b>${spot.title}</b><br>Priority: ${spot.type}`);
+    });
+
+    // Zoom function for sidebar cards
+    function zoomTo(lat, lng) {
+        map.flyTo([lat, lng], 15, {
+            duration: 1.5
+        });
+    }
+
+    // Fix map initialization issue with flex containers
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 100);
+</script>
+{% endblock %}

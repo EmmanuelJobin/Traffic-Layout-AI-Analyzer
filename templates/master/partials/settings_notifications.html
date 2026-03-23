@@ -1,0 +1,68 @@
+<div class="settings-panel full-width">
+    <div class="panel-header mb-5">
+        <div class="panel-icon text-primary bg-primary-light">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
+        </div>
+        <div>
+            <h3 class="panel-title">Notification Preferences</h3>
+            <p class="panel-desc">Manage how you receive alerts and updates</p>
+        </div>
+    </div>
+
+    <div class="notifications-list">
+        <div class="notification-item">
+            <div class="notification-info">
+                <h4 class="text-white font-semibold">Email Alerts</h4>
+                <p>Receive email notifications for important events</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div class="notification-item">
+            <div class="notification-info">
+                <h4 class="text-white font-semibold">Push Notifications</h4>
+                <p>Get real-time browser notifications</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div class="notification-item">
+            <div class="notification-info">
+                <h4 class="text-white font-semibold">Weekly Summary Reports</h4>
+                <p>Receive weekly digest of project activities</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div class="notification-item border-none">
+            <div class="notification-info">
+                <h4 class="text-white font-semibold">Critical Issues</h4>
+                <p>Immediate alerts for critical compliance violations</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="email-notification-section">
+        <div class="form-group">
+            <label class="mb-2 font-semibold">Notification Email</label>
+            <input type="email" class="form-control" placeholder="your.email@example.com" value="your.email@example.com">
+        </div>
+
+        <div class="panel-footer btn-settings-footer">
+            <button type="button" class="btn btn-primary w-100 btn-settings">Save Notification Settings</button>
+        </div>
+    </div>
+</div>

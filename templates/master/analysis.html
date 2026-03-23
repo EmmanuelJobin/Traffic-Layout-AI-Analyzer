@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard-header mb-4 mt-2">
+    <div class="header-titles">
+        <h2>Compliance Analysis</h2>
+        <p class="text-muted">Analysis performed on 1/10/2026</p>
+    </div>
+</div>
+
+<div class="stats-row mb-5" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="stat-card" style="border-color: rgba(239,68,68,0.5)">
+        <p class="text-secondary text-sm mb-3 flex-align text-danger">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg> 
+            Critical Issues
+        </p>
+        <h3 class="stat-value text-danger" style="font-size: 2.5rem; margin-bottom: 0.5rem;">2</h3>
+        <p class="text-xs text-muted">Requires immediate attention</p>
+    </div>
+    <div class="stat-card" style="border-color: rgba(251,191,36,0.5)">
+        <p class="text-secondary text-sm mb-3 flex-align text-warning">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+            Warnings
+        </p>
+        <h3 class="stat-value text-warning" style="font-size: 2.5rem; margin-bottom: 0.5rem;">2</h3>
+        <p class="text-xs text-muted">Recommended improvements</p>
+    </div>
+    <div class="stat-card" style="border-color: rgba(16,185,129,0.5)">
+        <p class="text-secondary text-sm mb-3 flex-align text-success">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Compliance Score
+        </p>
+        <h3 class="stat-value text-success" style="font-size: 2.5rem; margin-bottom: 0.5rem;">74%</h3>
+        <p class="text-xs text-muted">Singapore standards</p>
+    </div>
+</div>
+
+<div class="analysis-content">
+    <h4 class="mb-1">Detected Issues</h4>
+    <p class="text-muted text-sm mb-4">Based on Singapore LTA traffic standards and safety guidelines</p>
+    
+    <div class="tabs-container flex-align mb-4" style="background:var(--surface-color); border-radius:6px; border:1px solid var(--border-color); overflow:hidden">
+        <div class="tab active flex-1 text-center py-2 text-sm" data-target="all">All (5)</div>
+        <div class="tab flex-1 text-center py-2 text-sm" data-target="critical">Critical (2)</div>
+        <div class="tab flex-1 text-center py-2 text-sm" data-target="warnings">Warnings (2)</div>
+        <div class="tab flex-1 text-center py-2 text-sm" data-target="info">Info (1)</div>
+    </div>
+
+    <!-- Issue block-->
+    <div class="project-card filterable-item" data-category="critical" style="background-color: var(--surface-color); padding:0; overflow:hidden; margin-bottom: 1rem;">
+        <!-- Card Header (Red tint) -->
+        <div style="background-color: rgba(239, 68, 68, 0.05); padding: 1.5rem; border-bottom: 1px solid rgba(239, 68, 68, 0.1);">
+            <div class="flex-align mb-2">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--danger-color)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <h4 style="color:var(--text-primary); margin-right: 0.5rem; font-size:1.125rem;">Blind Curve</h4>
+                <span class="badge" style="background:rgba(239,68,68,0.2); color:var(--danger-text); padding: 0.15rem 0.5rem; font-size: 0.7rem;">critical</span>
+            </div>
+            <p style="color:var(--text-primary); font-size:0.9rem; margin-bottom:1rem;">Ninety-degree blind curve detected without proper warning signage or convex mirror</p>
+            
+            <div class="text-sm text-secondary" style="line-height:1.8;">
+                <div><span style="font-weight:600; color:var(--text-secondary);">Location:</span> Junction of Main Road and Side Street</div>
+                <div><span style="font-weight:600; color:var(--text-secondary);">Rule:</span> LTA Code of Practice - Section 3.2: Sharp curves must have adequate warning signage</div>
+                <div><span style="font-weight:600; color:var(--text-secondary);">Suggested Fix:</span> Install convex safety mirror to improve visibility</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Issue -->
+    <div class="project-card filterable-item" data-category="info" style="background-color: var(--surface-color); padding:0; overflow:hidden; margin-bottom: 1rem; display:none;">
+        <div style="background-color: rgba(56, 189, 248, 0.05); padding: 1.5rem; border-bottom: 1px solid rgba(56, 189, 248, 0.1);">
+            <div class="flex-align mb-2">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--primary-color)"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                <h4 style="color:var(--text-primary); margin-right: 0.5rem; font-size:1.125rem;">Lighting</h4>
+                <span class="badge" style="background:rgba(56,189,248,0.2); color:var(--primary-color); padding: 0.15rem 0.5rem; font-size: 0.7rem;">info</span>
+            </div>
+            <p style="color:var(--text-primary); font-size:0.9rem; margin-bottom:1rem;">Insufficient street lighting in pedestrian area</p>
+            
+            <div class="text-sm text-secondary" style="line-height:1.8;">
+                <div><span style="font-weight:600; color:var(--text-secondary);">Location:</span> Pathway between Block 145 and Park</div>
+                <div><span style="font-weight:600; color:var(--text-secondary);">Rule:</span> LTA Lighting Standards for pedestrian paths</div>
+                <div><span style="font-weight:600; color:var(--text-secondary);">Suggested Fix:</span> Install additional lamp posts along the pathway</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

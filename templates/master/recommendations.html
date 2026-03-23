@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard-header mb-4 mt-2">
+    <div class="header-titles">
+        <h2>Traffic Calming Recommendations</h2>
+        <p class="text-muted">AI-powered suggestions to improve traffic safety and compliance</p>
+    </div>
+</div>
+
+<div class="stats-row mb-5">
+    <div class="stat-card" style="border-color: rgba(255,255,255,0.1)">
+        <p class="text-secondary text-sm mb-2 flex-align">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="text-primary"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg> 
+            Total Recommendations
+        </p>
+        <h3 class="stat-value">6</h3>
+    </div>
+    <div class="stat-card" style="border-color: rgba(239,68,68,0.4)">
+        <p class="text-secondary text-sm mb-2 flex-align text-danger">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+            High Priority
+        </p>
+        <h3 class="stat-value text-danger">3</h3>
+    </div>
+    <div class="stat-card" style="border-color: rgba(251,191,36,0.4)">
+        <p class="text-secondary text-sm mb-2 flex-align text-warning">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+            Medium Priority
+        </p>
+        <h3 class="stat-value text-warning">2</h3>
+    </div>
+    <div class="stat-card" style="border-color: rgba(16,185,129,0.4)">
+        <p class="text-secondary text-sm mb-2 flex-align text-success">
+            <span style="font-weight:bold">$</span> Est. Cost
+        </p>
+        <h3 class="stat-value text-success">$23,750</h3>
+    </div>
+</div>
+
+<div class="recommendations-content">
+    <h4 class="mb-1">Recommended Measures</h4>
+    <p class="text-muted text-sm mb-4">Prioritized traffic calming and safety improvements</p>
+    
+    <div class="tabs-container flex-align mb-4" style="background:var(--surface-color); border-radius:6px; border:1px solid var(--border-color); overflow:hidden">
+        <div class="tab active flex-1 text-center py-2 text-sm" data-target="all">All (6)</div>
+        <div class="tab flex-1 text-center py-2 text-sm" data-target="high">High (3)</div>
+        <div class="tab flex-1 text-center py-2 text-sm" data-target="medium">Medium (2)</div>
+        <div class="tab flex-1 text-center py-2 text-sm" data-target="low">Low (1)</div>
+    </div>
+
+    <div class="project-card filterable-item" data-category="high" style="border-left: 4px solid var(--danger-color); margin-bottom:1rem;">
+        <div class="flex-between" style="align-items:flex-start">
+            <div class="flex-align" style="align-items:flex-start; gap:1.5rem">
+                <div class="icon-circle" style="min-width:40px; height:40px; border-radius:50%; background:rgba(251,191,36,0.2); display:flex; align-items:center; justify-content:center; color:var(--warning-color); font-weight:bold">
+                    O
+                </div>
+                <div>
+                    <h4 class="mb-1" style="font-size:1.125rem">Convex Mirror</h4>
+                    <p class="text-secondary text-sm mb-3">Install convex safety mirror at blind junction to improve visibility for drivers</p>
+                    <div class="flex-align text-sm text-secondary mb-4 gap-3">
+                        <span class="flex-align">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> 
+                            Junction of Main Road and Side Street
+                        </span>
+                        <span>$850</span>
+                    </div>
+                    <div class="flex-align gap-3">
+                        <button class="btn btn-outline text-sm py-2">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Mark as Implemented
+                        </button>
+                        <button class="btn text-sm py-2 text-primary" style="background:none">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <span class="badge" style="background:rgba(239,68,68,0.2); color:var(--danger-text)">high</span>
+        </div>
+    </div>
+    
+    <!-- Medium Card -->
+    <div class="project-card filterable-item" data-category="medium" style="border-left: 4px solid var(--warning-color); margin-bottom:1rem; display:none;">
+        <div class="flex-between" style="align-items:flex-start">
+            <div class="flex-align" style="align-items:flex-start; gap:1.5rem">
+                <!-- Icon Dummy: Pencil -->
+                <div class="icon-circle" style="min-width:40px; height:40px; border-radius:50%; background:rgba(251,191,36,0.2); display:flex; align-items:center; justify-content:center; color:var(--warning-color); font-weight:bold">
+                    ✎
+                </div>
+                <div>
+                    <h4 class="mb-1" style="font-size:1.125rem">Road Marking</h4>
+                    <p class="text-secondary text-sm mb-3">Repaint and widen pedestrian crossing markings</p>
+                    <div class="flex-align text-sm text-secondary mb-4 gap-3">
+                        <span class="flex-align">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> 
+                            Crossing near Shopping Mall entrance
+                        </span>
+                        <span>$2,100</span>
+                    </div>
+                    <div class="flex-align gap-3">
+                        <button class="btn btn-outline text-sm py-2">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Mark as Implemented
+                        </button>
+                        <button class="btn text-sm py-2 text-primary" style="background:none">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <span class="badge" style="background:rgba(251,191,36,0.2); color:var(--warning-color)">medium</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard-header mb-4 mt-2">
+    <div class="header-titles">
+        <h2>Cost Estimation & Budget Planning</h2>
+        <p class="text-muted">Financial planning and budget allocation for traffic safety improvements</p>
+    </div>
+</div>
+
+<div class="stats-row mb-5">
+    <div class="stat-card" style="border-color: rgba(56,189,248,0.3)">
+        <p class="text-secondary text-sm mb-2 flex-align text-primary">
+            <span style="font-weight:bold">$</span> Total Budget
+        </p>
+        <h3 class="stat-value text-primary">$143K</h3>
+        <p class="text-xs text-muted mt-1">FY 2026</p>
+    </div>
+    <div class="stat-card" style="border-color: rgba(251,191,36,0.3)">
+        <p class="text-secondary text-sm mb-2 flex-align text-warning">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2L4 22h16L12 2zm0 4.5l5.5 13.5H6.5L12 6.5z"/></svg> 
+            Spent
+        </p>
+        <h3 class="stat-value text-warning">$46K</h3>
+        <p class="text-xs text-muted mt-1">32% utilized</p>
+    </div>
+    <div class="stat-card" style="border-color: rgba(167,139,250,0.3)">
+        <p class="text-secondary text-sm mb-2 flex-align" style="color:#a78bfa">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg> 
+            Projected
+        </p>
+        <h3 class="stat-value" style="color:#a78bfa">$90K</h3>
+        <p class="text-xs text-muted mt-1">63% of budget</p>
+    </div>
+    <div class="stat-card" style="border-color: rgba(16,185,129,0.3)">
+        <p class="text-secondary text-sm mb-2 flex-align text-success">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M4 18h17v2H4zM4 11h17v2H4zM2 4h19v2H2z"/></svg>
+            Recommendations
+        </p>
+        <h3 class="stat-value text-success">$24K</h3>
+        <p class="text-xs text-muted mt-1">6 items</p>
+    </div>
+</div>
+
+<div class="project-grid mt-4" style="grid-template-columns: 1fr 1fr;">
+    <!-- Donut Chart Card -->
+    <div class="project-card flex-between" style="flex-direction:column; align-items:flex-start;">
+        <div class="flex-align mb-1">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" class="text-primary"><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2 0v8.99l7.53 7.53C21.46 16.5 22 14.31 22 12c0-5.05-3.86-9.14-8.81-9.9zm1.41 11.41L13 11.99V22c4.37-.43 7.84-3.66 8.35-7.85l-6.94-.74z"/></svg>
+            <h4 class="card-title">Budget Allocation by Category</h4>
+        </div>
+        <p class="text-secondary text-sm mb-4">Total budget distribution across safety categories</p>
+        
+        <div class="flex-align" style="width:100%; justify-content:center; gap:2rem; padding: 2rem 0">
+            <!-- Simulated Donut Chart with CSS -->
+            <div style="width: 200px; height: 200px; border-radius: 50%; background: conic-gradient(#10b981 0% 25%, #f59e0b 25% 65%, #3b82f6 65% 80%, #a855f7 80% 100%); position: relative; display: flex; align-items: center; justify-content: center; transform: rotate(-45deg);">
+               <div style="width: 140px; height: 140px; background-color: var(--surface-color); border-radius: 50%;"></div>
+            </div>
+            
+            <div class="flex-1" style="display:flex; flex-direction:column; gap:1rem;">
+                <div class="flex-align text-sm"><span style="display:inline-block; width:12px; height:12px; background:#f59e0b; border-radius:2px;"></span> Speed Control: $25K (17%)</div>
+                <div class="flex-align text-sm"><span style="display:inline-block; width:12px; height:12px; background:#10b981; border-radius:2px;"></span> Signage: $20K (14%)</div>
+                <div class="flex-align text-sm"><span style="display:inline-block; width:12px; height:12px; background:#a855f7; border-radius:2px;"></span> Road Markings: $18K (13%)</div>
+                <div class="flex-align text-sm"><span style="display:inline-block; width:12px; height:12px; background:#3b82f6; border-radius:2px;"></span> Safety Mirrors: $15K (10%)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bar Chart Card -->
+    <div class="project-card flex-between" style="flex-direction:column; align-items:flex-start;">
+        <div class="flex-align mb-1">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" class="text-primary"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/></svg>
+            <h4 class="card-title">Spending Analysis by Category</h4>
+        </div>
+        <p class="text-secondary text-sm mb-4">Comparison of allocated, spent, and projected costs</p>
+
+        <div style="width:100%; display:flex; flex-direction:column; gap:1.5rem; padding-top:1rem;">
+            <!-- Category Group -->
+            <div class="flex-align gap-3">
+                <div class="text-sm text-secondary text-right" style="width: 80px;">Safety Mirrors</div>
+                <div class="flex-1" style="display:flex; flex-direction:column; gap:6px;">
+                    <div style="height:8px; width:40%; background:#a855f7; border-radius:4px;"></div>
+                    <div style="height:8px; width:20%; background:#f59e0b; border-radius:4px;"></div>
+                    <div style="height:8px; width:60%; background:#3b82f6; border-radius:4px;"></div>
+                </div>
+            </div>
+            <div class="flex-align gap-3">
+                <div class="text-sm text-secondary text-right" style="width: 80px;">Speed Control</div>
+                <div class="flex-1" style="display:flex; flex-direction:column; gap:6px;">
+                    <div style="height:8px; width:50%; background:#a855f7; border-radius:4px;"></div>
+                    <div style="height:8px; width:80%; background:#f59e0b; border-radius:4px;"></div>
+                    <div style="height:8px; width:90%; background:#3b82f6; border-radius:4px;"></div>
+                </div>
+            </div>
+            <div class="flex-align gap-3">
+                <div class="text-sm text-secondary text-right" style="width: 80px;">Signage</div>
+                <div class="flex-1" style="display:flex; flex-direction:column; gap:6px;">
+                    <div style="height:8px; width:60%; background:#a855f7; border-radius:4px;"></div>
+                    <div style="height:8px; width:15%; background:#f59e0b; border-radius:4px;"></div>
+                    <div style="height:8px; width:70%; background:#3b82f6; border-radius:4px;"></div>
+                </div>
+            </div>
+            <!-- Axis line placeholder -->
+            <div style="border-top: 1px dashed var(--border-color); margin-top: 1rem; margin-left: 92px; height:20px;"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

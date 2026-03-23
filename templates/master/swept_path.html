@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard-header mb-4 mt-2 flex-between">
+    <div class="header-titles">
+        <h2>3D Swept Path Analysis</h2>
+        <p class="text-muted">Dynamic vehicle turning movement simulation with clearance zones</p>
+    </div>
+    <div class="header-actions flex-align">
+        <button class="btn btn-outline" style="border-color:var(--primary-color); color:var(--primary-color);">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2L4 6v12l8 4 8-4V6l-8-4zm0 2.24l6 3L12 10.24 6 7.24l6-3zM5 16.51V8.24l6 3v8.27l-6-3zm14 0l-6 3V11.24l6-3v8.27z"/></svg> 
+            3D View
+        </button>
+        <button class="btn btn-primary">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M21 3H3v18h18V3zM19 19H5V5h14v14zm-4-4h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2H7v-2zM7 7h10v6H7V7z"/></svg>
+            Clearance
+        </button>
+    </div>
+</div>
+
+<div class="flex-align gap-3" style="align-items:stretch; margin-top:2rem;">
+    <!-- Left Column: Simulation Viewport -->
+    <div class="project-card flex-1" style="position:relative; display:flex; flex-direction:column; min-height:500px; padding:1.5rem; border:1px solid var(--border-color); border-radius:8px; overflow:hidden;">
+        <div class="flex-between mb-3" style="position:relative; z-index:10;">
+            <div>
+                <h4 class="card-title">Simulation Viewport</h4>
+                <p class="text-secondary text-sm">Interactive 3D visualization with clearance analysis</p>
+            </div>
+            <div class="flex-align" style="border:1px solid var(--border-color); border-radius:6px; overflow:hidden;">
+                <button class="btn text-sm py-1" style="background:var(--primary-bg-light); color:var(--primary-color); border-radius:0;">Current Path</button>
+                <button class="btn text-sm py-1 btn-outline" style="border:none; color:var(--success-color); border-radius:0;">Recommended</button>
+            </div>
+        </div>
+        
+        <!-- Simulation Graphics Dummy -->
+        <div style="flex:1; background:rgba(0,0,0,0.2); border-radius:8px; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.05)">
+            <!-- Road visualization -->
+            <div style="position:absolute; bottom:20%; width:100%; height:80px; background:#1e293b; border-top:2px solid #f59e0b; border-bottom:2px solid #f59e0b;">
+                <div style="width:100%; height:2px; background:repeating-linear-gradient(90deg, transparent, transparent 10px, white 10px, white 30px); position:absolute; top:50%;"></div>
+            </div>
+            
+            <!-- Vehicle Parameters Box -->
+            <div style="position:absolute; top:20px; left:20px; background:var(--surface-color); border:1px solid var(--primary-color); padding:1rem; border-radius:6px; width:220px; box-shadow:0 4px 6px rgba(0,0,0,0.5);">
+                <h5 class="text-primary mb-2">Vehicle Parameters</h5>
+                <ul style="list-style:none; padding:0; margin:0; font-size:0.75rem; color:var(--text-primary); display:flex; flex-direction:column; gap:0.25rem;">
+                    <li>Type: <span style="font-weight:bold">CAR</span></li>
+                    <li>Dimensions: 4.5m × 1.8m × 1.5m</li>
+                    <li>Wheelbase: 2.7m</li>
+                    <li class="mt-2 text-primary">Current Radius: 5.5m</li>
+                    <li class="text-success">Recommended: 6.3m</li>
+                    <li class="mt-2 text-warning font-semibold">Progress: 0%</li>
+                </ul>
+            </div>
+            
+            <!-- Vehicle Graphic Dummy -->
+            <div style="position:absolute; bottom:25%; left:20%; width:60px; height:30px; background:var(--primary-color); border-radius:4px; display:flex; align-items:center; justify-content:center; color:#000; font-size:0.6rem; font-weight:bold;">
+                W: 1.8m
+            </div>
+            
+            <!-- Clearance Zone dummy -->
+            <div style="position:absolute; right:20px; top:40%; background:#f59e0b; color:#000; padding:1rem; font-size:0.875rem; border-radius:4px; font-weight:bold;">
+                Clearance Zone<br><span style="font-weight:normal; font-size:0.75rem;">Safety: 1.0m</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Configuration -->
+    <div class="project-card" style="width:380px;">
+        <h4 class="card-title mb-1">Vehicle Configuration</h4>
+        <p class="text-secondary text-sm mb-4">Select or customize vehicle parameters</p>
+        
+        <form class="project-form">
+            <div class="form-group mb-4">
+                <label>Vehicle Type</label>
+                <div class="custom-select-wrapper" style="width:100%;">
+                    <svg class="select-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+                    <select class="custom-select" style="padding-left:2.5rem;">
+                        <option>Car</option>
+                        <option>Truck</option>
+                        <option>Bus</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="flex-between gap-3 mb-4">
+                <div class="form-group flex-1">
+                    <label>Width (m)</label>
+                    <input type="text" class="form-control" value="1.8">
+                </div>
+                <div class="form-group flex-1">
+                    <label>Length (m)</label>
+                    <input type="text" class="form-control" value="4.5">
+                </div>
+            </div>
+            
+            <div class="flex-between gap-3 mb-4">
+                <div class="form-group flex-1">
+                    <label>Height (m)</label>
+                    <input type="text" class="form-control" value="1.5">
+                </div>
+                <div class="form-group flex-1">
+                    <label>Wheelbase (m)</label>
+                    <input type="text" class="form-control" value="2.7">
+                </div>
+            </div>
+            
+            <div class="form-group mb-4">
+                <label>Turning Radius (m)</label>
+                <input type="text" class="form-control" value="5.5">
+            </div>
+            
+            <div class="form-group mt-5">
+                <div class="flex-between text-sm mb-2">
+                    <label style="margin:0;">Manual Angle Control</label>
+                    <span class="text-primary font-semibold">0°</span>
+                </div>
+                <input type="range" min="-45" max="45" value="0" style="width:100%; height:4px; background:var(--surface-hover); appearance:none; outline:none; border-radius:2px;">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

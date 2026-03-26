@@ -4,13 +4,14 @@
 {% block content %}
 <div class="ai-engine-page-container">
     <!-- Header with Title and Start Button -->
+    <!-- Header with Title and Start Button -->
     <div class="engine-header">
         <div class="engine-title">
             <h2>AI Rule Engine</h2>
             <p>Deep learning-powered traffic compliance analysis</p>
         </div>
         <div class="engine-actions">
-            <button class="btn btn-primary" style="padding: 0.6rem 1.25rem;">
+            <button class="btn btn-primary" id="startAnalysisBtn" style="padding: 0.6rem 1.25rem;">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="transform: rotate(-45deg);"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
                 Start Analysis
             </button>
@@ -34,7 +35,7 @@
                     </div>
                     <p class="project-filename">orchard_road_layout.pdf</p>
                     <div class="project-status-badge">
-                        <span class="badge badge-success" style="font-size: 0.65rem; padding: 0.1rem 0.6rem;">completed</span>
+                        <span class="badge badge-success" id="project1Status" style="font-size: 0.65rem; padding: 0.1rem 0.6rem;">completed</span>
                     </div>
                 </div>
 
@@ -76,12 +77,13 @@
                         <p>orchard_road_layout.pdf • pdf</p>
                     </div>
                 </div>
-                <div class="active-project-status">
+                <div class="active-project-status" id="workspaceProjectStatus">
                     <span class="badge badge-success">completed</span>
                 </div>
             </div>
 
-            <div class="workspace-empty-state">
+            <!-- Ready State -->
+            <div class="workspace-empty-state" id="readyState">
                 <div class="workspace-watermark">TRAFFIC AI</div>
                 <div class="workspace-watermark" style="top: 55%; font-size: 2rem; opacity: 0.05;">LTA COMPLIANCE SYSTEM</div>
                 
@@ -94,7 +96,320 @@
                     <p>Click "Start Analysis" to begin processing the selected project</p>
                 </div>
             </div>
+
+            <!-- Analysis State (Initially Hidden) -->
+            <div class="analysis-container hidden" id="analysisState">
+                <!-- Analysis Pipeline -->
+                <div class="analysis-pipeline">
+                    <div class="pipeline-header">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                        Analysis Pipeline
+                    </div>
+                    <div class="pipeline-steps">
+                        <!-- Step 1 -->
+                        <div class="pipeline-step" id="step1">
+                            <div class="step-info">
+                                <div class="step-label">
+                                    <div class="step-icon">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                                    </div>
+                                    Initializing AI Engine
+                                </div>
+                                <div class="step-count">1/6</div>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" id="pb1"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="pipeline-step" id="step2">
+                            <div class="step-info">
+                                <div class="step-label">
+                                    <div class="step-icon">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
+                                    </div>
+                                    Parsing Document
+                                </div>
+                                <div class="step-count">2/6</div>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" id="pb2"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="pipeline-step" id="step3">
+                            <div class="step-info">
+                                <div class="step-label">
+                                    <div class="step-icon">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                                    </div>
+                                    Analyzing Layout
+                                </div>
+                                <div class="step-count">3/6</div>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" id="pb3"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="pipeline-step" id="step4">
+                            <div class="step-info">
+                                <div class="step-label">
+                                    <div class="step-icon">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                                    </div>
+                                    Identifying Non-Compliances
+                                </div>
+                                <div class="step-count">4/6</div>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" id="pb4"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="pipeline-step" id="step5">
+                            <div class="step-info">
+                                <div class="step-label">
+                                    <div class="step-icon">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                                    </div>
+                                    Generating Recommendations
+                                </div>
+                                <div class="step-count">5/6</div>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" id="pb5"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div class="pipeline-step" id="step6">
+                            <div class="step-info">
+                                <div class="step-label">
+                                    <div class="step-icon">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                                    </div>
+                                    Finalizing Report
+                                </div>
+                                <div class="step-count">6/6</div>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" id="pb6"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Processing Console -->
+                <div class="console-card">
+                    <div class="console-header">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-9 12H5v-2h6v2zm8-4H5V8h14v4z"/></svg>
+                        Live Processing Console
+                    </div>
+                    <div class="console-body" id="consoleBody">
+                    </div>
+                </div>
+
+                <!-- Analysis Statistics -->
+                <div class="analysis-stats-header">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                    Analysis Statistics
+                </div>
+                <div class="analysis-stats-row text-center">
+                    <div class="stat-card-mini highlight-primary">
+                        <div class="stat-value" id="statStages">0</div>
+                        <div class="stat-label">Stages Completed</div>
+                    </div>
+                    <div class="stat-card-mini highlight-warning">
+                        <div class="stat-value" id="statViolations">-</div>
+                        <div class="stat-label">Violations Found</div>
+                    </div>
+                    <div class="stat-card-mini highlight-warning">
+                        <div class="stat-value" id="statRecommendations">-</div>
+                        <div class="stat-label">Recommendations</div>
+                    </div>
+                    <div class="stat-card-mini highlight-success compliance-card">
+                        <div class="powered-by">POWERED BY<br>TRAFFIC AI<br>SINGAPORE LTA CERTIFIED</div>
+                        <div class="stat-value" id="statCompliance">-</div>
+                        <div class="stat-label">Compliance Score</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="workspace-watermark-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; display: flex; align-items: center; justify-content: center; overflow: hidden; opacity: 0.03;">
+                <div style="font-size: 15rem; font-weight: 900; transform: rotate(-15deg); white-space: nowrap;">TRAFFIC AI</div>
+            </div>
         </main>
     </div>
+</div>
+
+<script>
+    document.getElementById('startAnalysisBtn').addEventListener('click', function() {
+        const startBtn = this;
+        const readyState = document.getElementById('readyState');
+        const analysisState = document.getElementById('analysisState');
+        const consoleBody = document.getElementById('consoleBody');
+        
+        // Disable button and change status
+        startBtn.disabled = true;
+        startBtn.innerHTML = '<span class="spinner-border spinner-border-sm mr-2"></span> Analyzing...';
+        
+        // Toggle visibility
+        readyState.classList.add('hidden');
+        analysisState.classList.remove('hidden');
+        
+        // Update project status badges
+        document.getElementById('project1Status').textContent = 'analyzing';
+        document.getElementById('project1Status').className = 'badge badge-primary';
+        document.getElementById('workspaceProjectStatus').querySelector('.badge').textContent = 'analyzing';
+        document.getElementById('workspaceProjectStatus').querySelector('.badge').className = 'badge badge-primary';
+
+        function getCurrentTimeString() {
+            return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+
+        // Log messages grouped by stage
+        const logGroups = {
+            1: [
+                { msg: 'Starting AI analysis for: Orchard Road Redesign', type: 'info' },
+                { msg: '[Initializing AI Engine] Loading Singapore LTA Traffic Standards v2024', type: 'success' },
+                { msg: '[Initializing AI Engine] Initializing deep learning models', type: 'success' },
+                { msg: '[Initializing AI Engine] Calibrating vision recognition systems', type: 'success' },
+                { msg: '[Initializing AI Engine] Preparing rule validation engine', type: 'success' }
+            ],
+            2: [
+                { msg: '[Parsing Document] OCR text extraction completed', type: 'success' },
+                { msg: '[Parsing Document] Vector data parsing in progress', type: 'success' },
+                { msg: '[Parsing Document] Identifying road elements and markings', type: 'success' },
+                { msg: '[Parsing Document] Extracting dimensional measurements', type: 'success' },
+                { msg: '[Parsing Document] Building spatial relationship graph', type: 'success' }
+            ],
+            3: [
+                { msg: '[Analyzing Layout] Analyzing intersection geometry', type: 'success' },
+                { msg: '[Analyzing Layout] Evaluating road width compliance', type: 'success' },
+                { msg: '[Analyzing Layout] Checking curve radii and angles', type: 'success' },
+                { msg: '[Analyzing Layout] Validating sight distance requirements', type: 'success' },
+                { msg: '[Analyzing Layout] Assessing pedestrian crossing zones', type: 'success' },
+                { msg: '[Analyzing Layout] Measuring lane configurations', type: 'success' }
+            ],
+            4: [
+                { msg: '[Identifying Non-Compliances] Found: 90-degree blind curve violation', type: 'warning' },
+                { msg: '[Identifying Non-Compliances] Found: Missing speed bump in school zone', type: 'warning' },
+                { msg: '[Identifying Non-Compliances] Found: Insufficient turning radius', type: 'warning' },
+                { msg: '[Identifying Non-Compliances] Found: Non-compliant pedestrian crossing', type: 'warning' },
+                { msg: '[Identifying Non-Compliances] Found: Missing road signage', type: 'warning' },
+                { msg: '[Identifying Non-Compliances] Generating violation severity scores', type: 'success' }
+            ],
+            5: [
+                { msg: '[Generating Recommendations] Recommending convex mirror installation', type: 'success' },
+                { msg: '[Generating Recommendations] Suggesting speed bump placement', type: 'success' },
+                { msg: '[Generating Recommendations] Optimizing road geometry adjustments', type: 'success' },
+                { msg: '[Generating Recommendations] Proposing additional signage locations', type: 'success' },
+                { msg: '[Generating Recommendations] Calculating cost-benefit analysis', type: 'success' },
+                { msg: '[Generating Recommendations] Prioritizing safety interventions', type: 'success' }
+            ],
+            6: [
+                { msg: '[Finalizing Report] Generating compliance score: 67%', type: 'info' },
+                { msg: '[Finalizing Report] Creating detailed violation report', type: 'success' },
+                { msg: '[Finalizing Report] Building recommendation matrix', type: 'success' },
+                { msg: '[Finalizing Report] Preparing geo-tagged hotspot data', type: 'success' },
+                { msg: '[Finalizing Report] Finalizing PDF export', type: 'success' },
+                { msg: '[Finalizing Report] Analysis complete!', type: 'success' }
+            ]
+        };
+
+        function addLog(log) {
+            const line = document.createElement('div');
+            line.className = 'console-line';
+            line.innerHTML = `
+                <span class="console-time">${getCurrentTimeString()}</span>
+                <span class="console-msg ${log.type}">${log.msg}</span>
+            `;
+            consoleBody.appendChild(line);
+            
+            // Robust scrolling to bottom
+            requestAnimationFrame(() => {
+                consoleBody.scrollTop = consoleBody.scrollHeight;
+            });
+            
+            // Update stats based on logs (mock logic)
+            if (log.msg.includes('Found:')) {
+                const currentViolations = parseInt(document.getElementById('statViolations').textContent) || 0;
+                document.getElementById('statViolations').textContent = currentViolations + 1;
+            }
+            if (log.msg.includes('Recommending') || log.msg.includes('Suggesting') || log.msg.includes('Optimizing') || log.msg.includes('Proposing')) {
+                const currentRecs = parseInt(document.getElementById('statRecommendations').textContent) || 0;
+                document.getElementById('statRecommendations').textContent = currentRecs + 1;
+            }
+        }
+
+        function playLogGroup(stepNum, duration) {
+            const group = logGroups[stepNum];
+            if (!group) return;
+            
+            const interval = duration / group.length;
+            group.forEach((log, index) => {
+                setTimeout(() => {
+                    addLog(log);
+                }, index * interval);
+            });
+        }
+
+        // Animate Pipeline Steps
+        function animateStep(stepNum, duration, nextStepCallback) {
+            const stepEl = document.getElementById('step' + stepNum);
+            const pb = document.getElementById('pb' + stepNum);
+            stepEl.classList.add('active');
+            
+            // Play logs for this step
+            playLogGroup(stepNum, duration);
+            
+            let progress = 0;
+            const stepDuration = duration / 50;
+            const interval = setInterval(() => {
+                progress += 2;
+                pb.style.width = progress + '%';
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    stepEl.classList.remove('active');
+                    stepEl.classList.add('completed');
+                    document.getElementById('statStages').textContent = stepNum;
+                    if (nextStepCallback) nextStepCallback();
+                }
+            }, stepDuration);
+        }
+
+        setTimeout(() => {
+            animateStep(1, 2000, () => {
+                animateStep(2, 3000, () => {
+                    animateStep(3, 4000, () => {
+                        animateStep(4, 4000, () => {
+                            animateStep(5, 4000, () => {
+                                animateStep(6, 3000, () => {
+                                    // Complete
+                                    document.getElementById('statCompliance').textContent = '67%';
+                                    startBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Analysis Complete';
+                                    
+                                    // Reset status badges to completed
+                                    document.getElementById('project1Status').textContent = 'completed';
+                                    document.getElementById('project1Status').className = 'badge badge-success';
+                                    document.getElementById('workspaceProjectStatus').querySelector('.badge').textContent = 'completed';
+                                    document.getElementById('workspaceProjectStatus').querySelector('.badge').className = 'badge badge-success';
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        }, 500);
+    });
+</script>
+
+
+
 </div>
 {% endblock %}
